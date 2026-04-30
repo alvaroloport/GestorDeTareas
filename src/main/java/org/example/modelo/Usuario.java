@@ -48,10 +48,13 @@ public class Usuario {
     }
 
     public void mostrarTareas(){
-        for (Tareas tarea : tareas) {
+        for (org.example.modelo.Tareas tarea : tareas) {
             System.out.println(tarea.toString());
         }
     }
 
-
+    @Override
+    public String toString() {
+        return getId() + ". " + getNombre();
+    }
 }

@@ -42,4 +42,7 @@ public class Categoria {
             System.out.println(tarea.getTitulo());
         }
     }
+    public String toString() {
+        return id + ". " + nombre;
+    }
 }

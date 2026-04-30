@@ -3,21 +3,21 @@ package org.example.modelo;
 import java.util.List;
 
 public class Estado {
-    private int ID;
+    private int id;
     private String nombreEstado;
     private String descripcion;
     private List<Tareas> tareas;
 
-    public Estado(int ID, String nombreEstado) {
-        this.ID = ID;
+    public Estado(int id, String nombreEstado) {
+        this.id = id;
         this.nombreEstado = nombreEstado;
     }
 
     public int getID() {
-        return ID;
+        return id;
     }
     public void setID(int ID) {
-        this.ID = ID;
+        this.id = id;
     }
     public String getNombreEstado() {
         return nombreEstado;
@@ -41,5 +41,10 @@ public class Estado {
         for (Tareas tarea : tareas) {
             System.out.println(tarea.getTitulo());
         }
+    }
+
+    @Override
+    public String toString() {
+        return id + ". " + nombreEstado;
     }
 }
