@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/comun.css">
+    <link rel="stylesheet" type="text/css" href="../css/aplicacion.css">
+    <script type="text/javascript" src="../scripts/aplicacion.js"></script>
+
+    <title>Proyecto intermodular - Reto 1</title>
+</head>
+
+
+<body>
+    <header>
+        <img src="../images/cabecera.jpg" id="cabecera">
+        <div id="credito">Imagen de <a href="https://pixabay.com/es/users/tungnguyen0905-17946924/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7111798">Tung Nguyen</a> en <a href="https://pixabay.com/es//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7111798">Pixabay</a></div>
+    </header>
+    <span class="contacto">
+        <a href="../index.html" class="cambio-pagina">INICIO</a>
+        <a href="#" class="cambio-pagina">CONTACTO</a>
+    </span>
+    <div class="container">
+        <section class="item">
+            <select name="" id="selector" onchange="selector();">
+                <option value="tarea" selected>Añadir tarea</option>
+                <option value="usuario">Añadir usuario</option>
+                <option value="categoria">Añadir categoria</option>
+            </select>
+            
+            <div id="tarea">
+                <form>
+                <label for="nombre">Nombre:</label><br>
+                <textarea id="nombre" name="nombre" rows="1" cols="40"></textarea><br>
+                <label for="descripcion">Descripcion:</label><br>
+                <textarea id="descripcion" name="descripcion" rows="4" cols="40"></textarea><br>
+                <label for="fechaLim">Fecha limite</label><br>
+                <input type="date" id="fechaLim" name="fechaLim" min=""><br>
+                <label for="selecUsuario">Usuario:</label><br>
+                <select id="selecUsuario" name="selecUsuario"></select><br>
+                <label for="slecCategoria">Categoria:</label><br>
+                <select id="slecCategoria" name="slecCategoria"></select><br>
+                <label for="observaciones">Observaciones:</label><br>
+                <textarea id="observaciones" name="observaciones" rows="4" cols="40">
+                
+                </textarea><br>
+                <input type="submit">
+            </form>
+            </div>
+
+            <div id="usuario" style="display: none;">
+                <form>
+                    <label for="nombre">Nombre:</label><br>
+                    <textarea id="nombre" name="nombre" rows="1" cols="40"></textarea><br>
+                    <label for="email">Email:</label><br>
+                    <textarea id="email" name="email" rows="1" cols="40"></textarea><br>
+                    <label for="contraseña">Contraseña:</label><br>
+                    <textarea id="contraseña" name="contraseña" rows="1" cols="40"></textarea><br>
+
+                    <input type="submit">
+            </form>
+            </div>
+
+            <div id="categoria" style="display: none;">
+                <form>
+                    <label for="nombre">Nombre:</label><br>
+                    <textarea id="nombre" name="nombre" rows="1" cols="40"></textarea><br>
+                    <label for="descripcion">Descripcion:</label><br>
+                    <textarea id="descripcion" name="descripcion" rows="4" cols="40"></textarea><br>
+
+                    <input type="submit">
+            </form>
+            </div>
+        </section>
+    </div>
+    <footer></footer>
+</body>
