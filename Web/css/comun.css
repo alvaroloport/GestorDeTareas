@@ -1,0 +1,53 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+
+}
+header{
+    font-size: small;
+    font-style: italic;
+}
+#cabecera{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: 0px -400px;
+}
+#credito{
+    position: absolute;
+    top: 195px;
+}
+.contacto{
+    position: absolute;
+    right: 0px;
+    background: black;
+    font-size: 2em;
+}
+.contacto a{
+    text-decoration: none;
+    color: white;
+}
+footer{
+    height: 25px;
+    background: black;
+}
+.container{
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.cambio-pagina{
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+.cambio-pagina:hover{
+    color: yellow;
+    font-size: 1.1em;
+}
+@media (max-width: 1500px) {
+   #cabecera{
+    object-position: 0px -50px;
+    } 
+}

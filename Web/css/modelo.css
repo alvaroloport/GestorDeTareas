@@ -1,0 +1,11 @@
+#diagrama{
+    width: 417px;
+    height: 452px;
+}
+.item{
+    font-size: 1.5em;
+    padding: 1em;
+    margin: 1em;
+    border:black;
+    border-style: solid;
+}
