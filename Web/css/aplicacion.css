@@ -16,7 +16,10 @@
     border-color: violet;
 }
 textarea{
-    font-size: 1.25em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    font-size: 0.75em;
+    width: 100%;
 }
 select{
     font-size: 1.15em;
@@ -33,4 +36,10 @@ select{
 }
 #categoria{
     margin-top: 1em;
+}
+#selector{
+    font-size: 1em;
+    border-style: none;
+    font-weight: bold;
+    font-style: oblique;
 }
