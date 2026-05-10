@@ -3,19 +3,34 @@
     height: 100%;
     justify-content: top;
     overflow: hidden;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .item{
-    background: gray;
+    background: lightgray;
     font-size: 1.5em;
     padding: 1em;
-    height: 100%;
-    margin-top: 1em;
+    height: 80%;
+    width: 35%;
+    border-style: solid;
+    border-color: violet;
 }
 textarea{
     font-size: 1.25em;
 }
 select{
     font-size: 1.15em;
+}
+#titulo{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.5em;
+}
+#tarea{
+    margin-top: 1em;
+}
+#usuario{
+    margin-top: 1em;
+}
+#categoria{
+    margin-top: 1em;
 }
