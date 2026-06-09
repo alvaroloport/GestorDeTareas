@@ -1,6 +1,7 @@
-package org.example.modelo;
+package src.main.java.org.example.modelo;
 
 import java.util.List;
+import src.main.java.org.example.modelo.Tareas;
 
 public class Categoria {
     private int id;

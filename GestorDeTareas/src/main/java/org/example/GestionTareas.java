@@ -1,8 +1,11 @@
-package org.example;
+package src.main.java.org.example;
 
 
-import org.example.modelo.*;
-
+import src.main.java.org.example.modelo.*;
+import src.main.java.org.example.modelo.Usuario;
+import src.main.java.org.example.modelo.Tareas;
+import src.main.java.org.example.modelo.Categoria;
+import src.main.java.org.example.modelo.Estado;
 import javax.xml.transform.Source;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

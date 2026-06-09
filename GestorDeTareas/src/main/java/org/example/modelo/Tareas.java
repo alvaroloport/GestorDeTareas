@@ -1,4 +1,10 @@
-package org.example.modelo;
+package src.main.java.org.example.modelo;
+
+import src.main.java.org.example.modelo.Usuario;
+import src.main.java.org.example.modelo.Estado;
+import src.main.java.org.example.modelo.Categoria;
+
+
 
 import java.time.LocalDate;
 import java.util.Date;

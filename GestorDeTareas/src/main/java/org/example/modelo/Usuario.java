@@ -1,6 +1,7 @@
-package org.example.modelo;
+package src.main.java.org.example.modelo;
 
 import java.util.List;
+import src.main.java.org.example.modelo.Tareas;
 
 public class Usuario {
     private int id;
@@ -48,7 +49,7 @@ public class Usuario {
     }
 
     public void mostrarTareas(){
-        for (org.example.modelo.Tareas tarea : tareas) {
+        for (Tareas tarea : tareas) {
             System.out.println(tarea.toString());
         }
     }
