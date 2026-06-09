@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Tareas {
-    private int id;
+    private Long id;
     private String titulo;
     private String descripcion;
     private LocalDate fechaCreacion;
@@ -20,7 +20,7 @@ public class Tareas {
     private Categoria categoria;
     private String observaciones;
 
-    public Tareas(int id, String titulo, String descripcion, LocalDate fechaCreacion, LocalDate fechaLimite, Usuario usuario,
+    public Tareas(Long id, String titulo, String descripcion, LocalDate fechaCreacion, LocalDate fechaLimite, Usuario usuario,
                   Estado estado, Categoria categoria, String observaciones) {
         this.id = id;
         this.titulo = titulo;
@@ -35,10 +35,10 @@ public class Tareas {
         estado.getTareas().add(this);
         categoria.getTareas().add(this);
     }
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getTitulo() {

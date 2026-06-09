@@ -22,16 +22,13 @@ public class GestionTareas {
     private static List<Categoria> categorias = new ArrayList<>();
     private static List<Tareas> tareas = new ArrayList<>();
     private static List<Estado> estados = new ArrayList<>();
-    private static int idUsuario = 0;
-    private static int idCategoria = 0;
-    private static int idTarea = 0;
 
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    private static Estado pendiente = new Estado(0, "Pendiente");
-    private static Estado enProgreso = new  Estado(1, "En Progreso");
-    private static Estado completada = new  Estado(2, "completada");
-    private static Estado cancelada = new  Estado(3, "cancelada");
+    private static Estado pendiente = new Estado(0L, "Pendiente");
+    private static Estado enProgreso = new  Estado(1L, "En Progreso");
+    private static Estado completada = new  Estado(2L, "completada");
+    private static Estado cancelada = new  Estado(3L, "cancelada");
 
 
     static void main() {
@@ -182,10 +179,9 @@ public class GestionTareas {
         sc.nextLine();
         System.out.println("Añade observaciones");
         String observaciones = sc.nextLine();
-        Tareas t = new Tareas(idTarea,nombre, descripcion, LocalDate.now(), LocalDate.parse(fecha, formatter),
+        Tareas t = new Tareas(null,nombre, descripcion, LocalDate.now(), LocalDate.parse(fecha, formatter),
                 usuarios.get(usuario), pendiente , categorias.get(categoria), observaciones);
         tareas.add(t);
-        idTarea++;
 
         System.out.println("Tarea añadida");
     }
@@ -196,11 +192,10 @@ public class GestionTareas {
         sc.nextLine();
         System.out.println("Añade una pequeña descripción");
         String descripcionCategoria = sc.nextLine();
-        Categoria c = new Categoria(idCategoria, nombreCategoria, descripcionCategoria);
+        Categoria c = new Categoria(null, nombreCategoria, descripcionCategoria);
         List<Tareas> listaTareas = new ArrayList<>();
         c.setTareas(listaTareas);
         categorias.add(c);
-        idCategoria++;
 
         System.out.println("Categoria añadida");
     }
@@ -212,11 +207,10 @@ public class GestionTareas {
         String email = sc.next();
         System.out.println("Introduce la contraseña del usuario");
         String password = sc.next();
-        Usuario u = new Usuario(idUsuario, nombre, email, password);
+        Usuario u = new Usuario(null, nombre, email, password);
         List<Tareas> listaTareas = new ArrayList<>();
         u.setTareas(listaTareas);
         usuarios.add(u);
-        idUsuario++;
 
         System.out.println("Usuario añadido");
     }

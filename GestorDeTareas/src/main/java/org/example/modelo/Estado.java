@@ -4,20 +4,20 @@ import java.util.List;
 import src.main.java.org.example.modelo.Tareas;
 
 public class Estado {
-    private int id;
+    private Long id;
     private String nombreEstado;
     private String descripcion;
     private List<Tareas> tareas;
 
-    public Estado(int id, String nombreEstado) {
+    public Estado(Long id, String nombreEstado) {
         this.id = id;
         this.nombreEstado = nombreEstado;
     }
 
-    public int getID() {
+    public Long getID() {
         return id;
     }
-    public void setID(int ID) {
+    public void setID(Long ID) {
         this.id = id;
     }
     public String getNombreEstado() {

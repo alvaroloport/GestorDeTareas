@@ -4,23 +4,23 @@ import java.util.List;
 import src.main.java.org.example.modelo.Tareas;
 
 public class Usuario {
-    private int id;
+    private Long id;
     private String nombre;
     private String email;
     private String password;
     private List<Tareas> tareas;
 
-    public Usuario(int id, String nombre, String email, String password) {
+    public Usuario(Long id, String nombre, String email, String password) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getNombre() {
