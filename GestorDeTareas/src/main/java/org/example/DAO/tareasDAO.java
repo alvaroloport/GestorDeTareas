@@ -1,7 +1,6 @@
 package src.main.java.org.example.DAO;
 
 import src.main.java.org.example.modelo.Tareas;
-import src.main.java.org.example.modelo.Usuario;
 
 import java.sql.*;
 import java.time.LocalDate;

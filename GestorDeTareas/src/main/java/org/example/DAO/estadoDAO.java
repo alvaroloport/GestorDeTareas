@@ -23,9 +23,9 @@ public class estadoDAO implements IOperationsCRUD<Estado> {
                 Long id =  rs.getLong("id");
                 String nombre = rs.getString("nombreEstado");
 
-                Estado t = new Estado(id, nombre);
+                Estado estado = new Estado(id, nombre);
 
-                estados.add(t);
+                estados.add(estado);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
