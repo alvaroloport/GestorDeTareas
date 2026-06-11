@@ -47,6 +47,102 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
         return tareas;
     }
 
+    public List<Tareas> getTareasUsuario(Long idUsuario) {
+        List<Tareas> tareas = new ArrayList<>();
+
+        try{
+            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+
+            String query = "SELECT * FROM usuario WHERE  idUsuario = ?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setLong(1, idUsuario);
+            ResultSet rs = ps.executeQuery(query);
+            while(rs.next()){
+                Long id =  rs.getLong("id");
+                String titulo = rs.getString("titulo");
+                String descripcion = rs.getString("descripcion");
+                LocalDate fechaCreacion = rs.getDate("fechaCreacion").toLocalDate();
+                LocalDate fechaLimite = rs.getDate("fechaLimite").toLocalDate();
+                Long usuario_id = rs.getLong("idUsuario");
+                Long estado_id = rs.getLong("idEstado");
+                Long categoria_id = rs.getLong("idCategoria");
+                String observaciones = rs.getString("observaciones");
+
+                Tareas t = new Tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuarioDAO.findById(usuario_id),
+                        estadoDAO.findById(estado_id), categoriaDAO.findById(categoria_id), observaciones);
+
+                tareas.add(t);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return tareas;
+    }
+
+    public List<Tareas> getTareasCategoria(Long idCategoria) {
+        List<Tareas> tareas = new ArrayList<>();
+
+        try{
+            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+
+            String query = "SELECT * FROM usuario WHERE  idCategoria = ?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setLong(1, idCategoria);
+            ResultSet rs = ps.executeQuery(query);
+            while(rs.next()){
+                Long id =  rs.getLong("id");
+                String titulo = rs.getString("titulo");
+                String descripcion = rs.getString("descripcion");
+                LocalDate fechaCreacion = rs.getDate("fechaCreacion").toLocalDate();
+                LocalDate fechaLimite = rs.getDate("fechaLimite").toLocalDate();
+                Long usuario_id = rs.getLong("idUsuario");
+                Long estado_id = rs.getLong("idEstado");
+                Long categoria_id = rs.getLong("idCategoria");
+                String observaciones = rs.getString("observaciones");
+
+                Tareas t = new Tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuarioDAO.findById(usuario_id),
+                        estadoDAO.findById(estado_id), categoriaDAO.findById(categoria_id), observaciones);
+
+                tareas.add(t);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return tareas;
+    }
+
+    public List<Tareas> getTareasEstado(Long idEstado) {
+        List<Tareas> tareas = new ArrayList<>();
+
+        try{
+            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+
+            String query = "SELECT * FROM usuario WHERE  idEstado = ?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setLong(1, idEstado);
+            ResultSet rs = ps.executeQuery(query);
+            while(rs.next()){
+                Long id =  rs.getLong("id");
+                String titulo = rs.getString("titulo");
+                String descripcion = rs.getString("descripcion");
+                LocalDate fechaCreacion = rs.getDate("fechaCreacion").toLocalDate();
+                LocalDate fechaLimite = rs.getDate("fechaLimite").toLocalDate();
+                Long usuario_id = rs.getLong("idUsuario");
+                Long estado_id = rs.getLong("idEstado");
+                Long categoria_id = rs.getLong("idCategoria");
+                String observaciones = rs.getString("observaciones");
+
+                Tareas t = new Tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuarioDAO.findById(usuario_id),
+                        estadoDAO.findById(estado_id), categoriaDAO.findById(categoria_id), observaciones);
+
+                tareas.add(t);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return tareas;
+    }
+
     @Override
     public Tareas findById(Long id) {
         Tareas t = null;
