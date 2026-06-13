@@ -1,7 +1,7 @@
-package src.main.java.org.example.modelo;
+package org.example.modelo;
 
 import java.util.List;
-import src.main.java.org.example.modelo.Tareas;
+import org.example.modelo.Tareas;
 
 public class Usuario {
     private Long id;

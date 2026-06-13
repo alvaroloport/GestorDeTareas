@@ -1,6 +1,6 @@
-package src.main.java.org.example.DAO;
+package org.example.DAO;
 
-import src.main.java.org.example.modelo.Estado;
+import org.example.modelo.Estado;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ public class estadoDAO implements IOperationsCRUD<Estado> {
         List<Estado> estados = new ArrayList<>();
 
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String query = "SELECT * FROM usuario";
             Statement st = conexion.createStatement();
@@ -37,7 +37,7 @@ public class estadoDAO implements IOperationsCRUD<Estado> {
     public Estado findById(Long id) {
         Estado estado = null;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
             String query = "SELECT * FROM usuario WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(query);
             ps.setLong(1, id);
@@ -58,7 +58,7 @@ public class estadoDAO implements IOperationsCRUD<Estado> {
     public int add(Estado object) {
         int resultado = 0;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String sql  = "INSERT INTO Tareas (nombreEstado) VALUES (?)";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -77,7 +77,7 @@ public class estadoDAO implements IOperationsCRUD<Estado> {
     public int update(Estado object) {
         int  resultado = 0;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String sql =  "UPDATE Tareas SET nombreEstado = ? WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class estadoDAO implements IOperationsCRUD<Estado> {
     public int deleteById(Long id) {
         int resultado = 0;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String sql  = "DELETE FROM Estado WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);

@@ -1,6 +1,6 @@
-package src.main.java.org.example.DAO;
+package org.example.DAO;
 
-import src.main.java.org.example.modelo.Tareas;
+import org.example.modelo.Tareas;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -20,7 +20,7 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
         List<Tareas> tareas = new ArrayList<>();
 
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String query = "SELECT * FROM usuario";
             Statement st = conexion.createStatement();
@@ -51,7 +51,7 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
         List<Tareas> tareas = new ArrayList<>();
 
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String query = "SELECT * FROM usuario WHERE  idUsuario = ?";
             PreparedStatement ps = conexion.prepareStatement(query);
@@ -83,7 +83,7 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
         List<Tareas> tareas = new ArrayList<>();
 
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String query = "SELECT * FROM usuario WHERE  idCategoria = ?";
             PreparedStatement ps = conexion.prepareStatement(query);
@@ -115,7 +115,7 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
         List<Tareas> tareas = new ArrayList<>();
 
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String query = "SELECT * FROM usuario WHERE  idEstado = ?";
             PreparedStatement ps = conexion.prepareStatement(query);
@@ -147,7 +147,7 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
     public Tareas findById(Long id) {
         Tareas t = null;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
             String query = "SELECT * FROM usuario WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(query);
             ps.setLong(1, id);
@@ -176,7 +176,7 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
     public int add(Tareas object) {
         int resultado = 0;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String sql  = "INSERT INTO Tareas (titulo, descripcion, fechaCreacion, fechaLimite, usuario, estado, categoria,"
                            + "observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -203,7 +203,7 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
     public int update(Tareas object) {
         int  resultado = 0;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String sql =  "UPDATE Tareas SET titulo = ?, descripcion = ?, fechaCreacion = ?. fechaLimite = ?,"
                             + "usuario = ?, estado = ?, categoria = ?, observaciones = ? WHERE id = ?";
@@ -231,7 +231,7 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
     public int deleteById(Long id) {
         int resultado = 0;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String sql  = "DELETE FROM Tareas WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);

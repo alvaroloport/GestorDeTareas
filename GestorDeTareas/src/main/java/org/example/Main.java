@@ -1,25 +1,22 @@
-package src.main.java.org.example;
+package org.example;
 
 
-import src.main.java.org.example.DAO.categoriaDAO;
-import src.main.java.org.example.DAO.estadoDAO;
-import src.main.java.org.example.DAO.tareasDAO;
-import src.main.java.org.example.DAO.usuarioDAO;
-import src.main.java.org.example.modelo.*;
-import src.main.java.org.example.modelo.Usuario;
-import src.main.java.org.example.modelo.Tareas;
-import src.main.java.org.example.modelo.Categoria;
-import src.main.java.org.example.modelo.Estado;
-import javax.xml.transform.Source;
+import org.example.DAO.categoriaDAO;
+import org.example.DAO.estadoDAO;
+import org.example.DAO.tareasDAO;
+import org.example.DAO.usuarioDAO;
+import org.example.modelo.Usuario;
+import org.example.modelo.Tareas;
+import org.example.modelo.Categoria;
+import org.example.modelo.Estado;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import java.time.LocalDate;
-
-public class GestionTareas {
+public class Main {
 
     private static final Scanner sc = new Scanner(System.in);
     private static List<Usuario> usuarios = new ArrayList<>();
@@ -30,11 +27,11 @@ public class GestionTareas {
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private static Estado pendiente = new Estado(0L, "Pendiente");
-    private static Estado enProgreso = new  Estado(1L, "En Progreso");
-    private static Estado completada = new  Estado(2L, "completada");
-    private static Estado cancelada = new  Estado(3L, "cancelada");
+    private static Estado enProgreso = new Estado(1L, "En Progreso");
+    private static Estado completada = new Estado(2L, "completada");
+    private static Estado cancelada = new Estado(3L, "cancelada");
 
-    private static usuarioDAO  usuarioDAO = new usuarioDAO();
+    private static usuarioDAO usuarioDAO = new usuarioDAO();
     private static tareasDAO tareasDAO = new tareasDAO();
     private static estadoDAO estadoDAO = new estadoDAO();
     private static categoriaDAO categoriaDAO = new categoriaDAO();
@@ -89,24 +86,24 @@ public class GestionTareas {
             }
 
 
-        }while (opcion!=0);
+        } while (opcion != 0);
 
     }
 
     private static void tareasEstado() {
         System.out.println("Selecciona un usuario");
-        for(Usuario u : usuarioDAO.getAll()){
+        for (Usuario u : usuarioDAO.getAll()) {
             u.toString();
         }
         Long usuario = sc.nextLong();
         List<Tareas> tareasUsuario = tareasDAO.getTareasUsuario(usuario);
         System.out.println("Selecciona un estado");
-        for(Estado e : estadoDAO.getAll()){
+        for (Estado e : estadoDAO.getAll()) {
             e.toString();
         }
         Long estado = sc.nextLong();
-        for(Tareas t : tareasDAO.getTareasEstado(estado)){
-            if (tareasUsuario.contains(t)){
+        for (Tareas t : tareasDAO.getTareasEstado(estado)) {
+            if (tareasUsuario.contains(t)) {
                 t.toString();
             }
         }
@@ -114,18 +111,18 @@ public class GestionTareas {
 
     private static void tareasCategoria() {
         System.out.println("Selecciona un usuario");
-        for(Usuario u : usuarioDAO.getAll()){
+        for (Usuario u : usuarioDAO.getAll()) {
             u.toString();
         }
         Long usuario = sc.nextLong();
         List<Tareas> tareasUsuario = tareasDAO.getTareasUsuario(usuario);
         System.out.println("Selecciona una categoria");
-        for(Categoria c : categoriaDAO.getAll()){
+        for (Categoria c : categoriaDAO.getAll()) {
             c.toString();
         }
         Long categoria = sc.nextLong();
-        for(Tareas t : tareasDAO.getTareasCategoria(categoria)){
-            if (tareasUsuario.contains(t)){
+        for (Tareas t : tareasDAO.getTareasCategoria(categoria)) {
+            if (tareasUsuario.contains(t)) {
                 t.toString();
             }
         }
@@ -133,29 +130,29 @@ public class GestionTareas {
 
     private static void tareasUsuario() {
         System.out.println("Selecciona un usuario");
-        for(Usuario u : usuarioDAO.getAll()){
+        for (Usuario u : usuarioDAO.getAll()) {
             u.toString();
         }
         Long usuario = sc.nextLong();
 
-        for(Tareas t : tareasDAO.getTareasUsuario(usuario)){
+        for (Tareas t : tareasDAO.getTareasUsuario(usuario)) {
             t.toString();
         }
     }
 
     private static void actualizarCategoria() {
         System.out.println("Selecciona un usuario");
-        for(Usuario u : usuarioDAO.getAll()){
+        for (Usuario u : usuarioDAO.getAll()) {
             u.toString();
         }
         Long usuario = sc.nextLong();
         System.out.println("Selecciona una tarea");
-        for(Tareas t : tareasDAO.getTareasUsuario(usuario)) {
+        for (Tareas t : tareasDAO.getTareasUsuario(usuario)) {
             t.toString();
         }
         Long tarea = sc.nextLong();
         System.out.println("Selecciona una categoria");
-        for(Categoria c : categoriaDAO.getAll()){
+        for (Categoria c : categoriaDAO.getAll()) {
             c.toString();
         }
         Long categoria = sc.nextLong();
@@ -163,28 +160,27 @@ public class GestionTareas {
         Tareas t = tareasDAO.findById(tarea);
         t.setCategoria(categoriaDAO.findById(categoria));
 
-        if(tareasDAO.update(t) == 1){
+        if (tareasDAO.update(t) == 1) {
             System.out.println("Estado actualizado");
-        }
-        else{
+        } else {
             System.out.println("Error actualizando estado");
         }
     }
 
     private static void actualizarEstado() {
         System.out.println("Selecciona un usuario");
-        for(Usuario u : usuarioDAO.getAll()){
+        for (Usuario u : usuarioDAO.getAll()) {
             u.toString();
         }
         Long usuario = sc.nextLong();
 
         System.out.println("Selecciona una tarea");
-        for(Tareas t : tareasDAO.getTareasUsuario(usuario)) {
+        for (Tareas t : tareasDAO.getTareasUsuario(usuario)) {
             t.toString();
         }
         Long tarea = sc.nextLong();
         System.out.println("En qué estado se encuentra la tarea?");
-        for(Estado e : estadoDAO.getAll()){
+        for (Estado e : estadoDAO.getAll()) {
             e.toString();
         }
         Long estado = sc.nextLong();
@@ -192,10 +188,9 @@ public class GestionTareas {
         Tareas t = tareasDAO.findById(tarea);
         t.setEstado(estadoDAO.findById(estado));
 
-        if(tareasDAO.update(t) == 1){
+        if (tareasDAO.update(t) == 1) {
             System.out.println("Estado actualizado");
-        }
-        else{
+        } else {
             System.out.println("Error actualizando estado");
         }
 
@@ -203,11 +198,11 @@ public class GestionTareas {
     }
 
     private static void crearTarea() {
-        if(usuarioDAO.getAll().size() == 0) {
+        if (usuarioDAO.getAll().size() == 0) {
             System.out.println("Añade un usuario primero");
             return;
         }
-        if(categoriaDAO.getAll().size() == 0) {
+        if (categoriaDAO.getAll().size() == 0) {
             System.out.println("Añade una categoria primero");
             return;
         }
@@ -218,32 +213,31 @@ public class GestionTareas {
         String descripcion = sc.nextLine();
         System.out.println("Añade una fecha límite");
         String fecha = sc.next();
-        while(LocalDate.parse(fecha, formatter).compareTo(LocalDate.now()) < 0){
+        while (LocalDate.parse(fecha, formatter).compareTo(LocalDate.now()) < 0) {
             System.out.println("Escribe una fecha que no haya pasado aún");
             System.out.println("Añade una fecha límite");
             fecha = sc.next();
         }
         System.out.println("Para qué usuario es la tarea?");
-        for(Usuario u : usuarioDAO.getAll()){
+        for (Usuario u : usuarioDAO.getAll()) {
             u.toString();
         }
         Long usuario = sc.nextLong();
         System.out.println("En qué categoria está?");
-        for(Categoria c : categoriaDAO.getAll() ) {
+        for (Categoria c : categoriaDAO.getAll()) {
             c.toString();
         }
         Long categoria = sc.nextLong();
         sc.nextLine();
         System.out.println("Añade observaciones");
         String observaciones = sc.nextLine();
-        Tareas t = new Tareas(null,nombre, descripcion, LocalDate.now(), LocalDate.parse(fecha, formatter),
-                usuarioDAO.findById(usuario), pendiente , categoriaDAO.findById(categoria), observaciones);
+        Tareas t = new Tareas(null, nombre, descripcion, LocalDate.now(), LocalDate.parse(fecha, formatter),
+                usuarioDAO.findById(usuario), pendiente, categoriaDAO.findById(categoria), observaciones);
         tareas.add(t);
 
-        if(tareasDAO.add(t) == 1){
+        if (tareasDAO.add(t) == 1) {
             System.out.println("Tarea añadida");
-        }
-        else{
+        } else {
             System.out.println("Error añadiendo tarea");
         }
     }
@@ -258,10 +252,9 @@ public class GestionTareas {
         List<Tareas> listaTareas = new ArrayList<>();
         c.setTareas(listaTareas);
         categorias.add(c);
-        if(categoriaDAO.add(c) == 1){
+        if (categoriaDAO.add(c) == 1) {
             System.out.println("Categoria añadida");
-        }
-        else{
+        } else {
             System.out.println("Error añadiendo la categoria");
         }
 
@@ -279,10 +272,9 @@ public class GestionTareas {
         List<Tareas> listaTareas = new ArrayList<>();
         u.setTareas(listaTareas);
         usuarios.add(u);
-        if (usuarioDAO.add(u) == 1){
+        if (usuarioDAO.add(u) == 1) {
             System.out.println("Usuario añadido");
-        }
-        else{
+        } else {
             System.out.println("Error añadiendo usuario");
         }
 

@@ -1,6 +1,6 @@
-package src.main.java.org.example.DAO;
+package org.example.DAO;
 
-import src.main.java.org.example.modelo.Usuario;
+import org.example.modelo.Usuario;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class usuarioDAO implements IOperationsCRUD<Usuario> {
         List<Usuario> usuarios = new ArrayList<>();
 
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String query = "SELECT * FROM usuario";
             Statement st = conexion.createStatement();
@@ -37,7 +37,7 @@ public class usuarioDAO implements IOperationsCRUD<Usuario> {
     public Usuario findById(Long id) {
         Usuario u = null;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
             String query = "SELECT * FROM usuario WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(query);
             ps.setLong(1, id);
@@ -60,7 +60,7 @@ public class usuarioDAO implements IOperationsCRUD<Usuario> {
     public int add(Usuario object) {
         int resultado = 0;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String sql  = "INSERT INTO usuario (nombre, email, password) VALUES (?, ?, ?)";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -80,7 +80,7 @@ public class usuarioDAO implements IOperationsCRUD<Usuario> {
     public int update(Usuario object) {
         int  resultado = 0;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String sql =  "UPDATE usuario SET nombre = ?, email = ? WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -100,7 +100,7 @@ public class usuarioDAO implements IOperationsCRUD<Usuario> {
     public int deleteById(Long id) {
         int resultado = 0;
         try{
-            Connection conexion = src.main.java.org.example.utils.conexion.getConnection();
+            Connection conexion = org.example.utils.conexion.getConnection();
 
             String sql  = "DELETE FROM usuario WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);

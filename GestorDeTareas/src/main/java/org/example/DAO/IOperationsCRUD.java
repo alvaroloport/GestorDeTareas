@@ -1,4 +1,4 @@
-package src.main.java.org.example.DAO;
+package org.example.DAO;
 
 import java.util.List;
 

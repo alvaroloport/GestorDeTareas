@@ -1,8 +1,8 @@
-package src.main.java.org.example.modelo;
+package org.example.modelo;
 
-import src.main.java.org.example.modelo.Usuario;
-import src.main.java.org.example.modelo.Estado;
-import src.main.java.org.example.modelo.Categoria;
+import org.example.modelo.Usuario;
+import org.example.modelo.Estado;
+import org.example.modelo.Categoria;
 
 
 
