@@ -37,7 +37,7 @@ public class Main {
     private static categoriaDAO categoriaDAO = new categoriaDAO();
 
 
-    static void main() {
+    static void main() throws Exception {
         estados.add(pendiente);
         estadoDAO.add(pendiente);
         List<tareas> tareasPendientes = new ArrayList<>();
@@ -98,10 +98,14 @@ public class Main {
         } while (opcion != 0);
     }
 
-    private static void borrarTarea() {
+    /**
+     * Elimina una tarea de la base de datos
+     * @throws ArrayStoreException - se lanza cuando no se encuentra ninguna tarea en la base de datos
+     * @throws Exception - se lanza al no poder eliminar una tarea
+     */
+    private static void borrarTarea() throws Exception {
         if (tareasDAO.getAll().size() == 0) {
-            System.out.println("Añade una tarea primero");
-            return;
+            throw new ArrayStoreException("Añade una tarea primero");
         }
         System.out.println("Selecciona una tarea");
         for (tareas t : tareasDAO.getAll()) {
@@ -113,7 +117,7 @@ public class Main {
             System.out.println("Tarea eliminada");
         }
         else {
-            System.out.println("Error al eliminar tarea");
+            throw new Exception("Error al eliminar tarea");
         }
     }
 
@@ -129,10 +133,15 @@ public class Main {
         }
     }
 
-    private static void modificarUsuario() {
+    /**
+     * Modifica los datos de un usuario
+     * @throws ArrayStoreException - se lanza cuando no se encuentra ningún usuarioen la base de datos
+     * @throws ArrayIndexOutOfBoundsException - se lanza cuando se introduce un usuario que no existe
+     * @throws Exception - se lanza al no poder modificar un usuario
+     */
+    private static void modificarUsuario() throws Exception {
         if (usuarioDAO.getAll().size() == 0) {
-            System.out.println("Añade un usuario primero");
-            return;
+            throw new ArrayStoreException("Añade un usuario primero");
         }
 
         List<Long> usuarios = new ArrayList<>();
@@ -142,8 +151,7 @@ public class Main {
         }
         Long usuario = sc.nextLong();
         if (!usuarios.contains(usuario)) {
-            System.out.println("El usuario no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("El usuario no existe");
         }
 
         System.out.println("Introduce el nuevo nombre");
@@ -159,14 +167,19 @@ public class Main {
             System.out.println("Usuario modificado");
         }
         else {
-            System.out.println("Error al modiciar el usuario");
+            throw new Exception("Error al modificar el usuario");
         }
     }
 
-    private static void modificarCategoria() {
+    /**
+     * Modifica los datos de una categoría
+     * @throws ArrayStoreException - se lanza cuando no se encuentra ninguna categoría en la base de datos
+     * @throws ArrayIndexOutOfBoundsException - se lanza cuando se introduce una categoría que no existe
+     * @throws Exception - se lanza al no poder modificar una categoría
+     */
+    private static void modificarCategoria() throws Exception {
         if (categoriaDAO.getAll().size() == 0) {
-            System.out.println("Añade una categoria primero");
-            return;
+            throw new ArrayStoreException("Añade una categoria primero");
         }
 
         System.out.println("Selecciona una categoria");
@@ -177,8 +190,7 @@ public class Main {
         }
         Long categoria = sc.nextLong();
         if(!categorias.contains(categoria)) {
-            System.out.println("La categoria no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("La categoria no existe");
         }
 
         System.out.println("Introduce el nuevo nombre");
@@ -192,14 +204,18 @@ public class Main {
             System.out.println("Categoria modificada");
         }
         else {
-            System.out.println("Error al modiciar la categoria");
+            throw new Exception("Error al modiciar la categoria");
         }
     }
 
+    /**
+     * Muestra todas las tareas de un usuario que se encuentran en un mismo estado
+     * @throws ArrayStoreException - se lanza cuando no se encuentra ningún usuario en la base de datos
+     * @throws ArrayIndexOutOfBoundsException - se lanza cuando se introduce un usuario o un estado que no existe
+     */
     private static void tareasEstado() {
         if (usuarioDAO.getAll().size() == 0) {
-            System.out.println("Añade un usuario primero");
-            return;
+            throw new ArrayStoreException("Añade un usuario primero");
         }
 
         List<Long> tareasUsuario = new ArrayList<>();
@@ -210,8 +226,7 @@ public class Main {
         }
         Long usuario = sc.nextLong();
         if(!tareasUsuario.contains(usuario)) {
-            System.out.println("El usuario no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("El usuario no existe");
         }
 
         System.out.println("Selecciona un estado");
@@ -220,8 +235,7 @@ public class Main {
         }
         Long estado = sc.nextLong();
         if(estado != 1L && estado != 2L && estado != 3L &&  estado != 4L)  {
-            System.out.println("Introduce un estado válido");
-            return;
+            throw new ArrayIndexOutOfBoundsException("Introduce un estado válido");
         }
 
         for (tareas t : tareasDAO.getTareasEstado(estado)) {
@@ -231,14 +245,17 @@ public class Main {
         }
     }
 
+    /**
+     * Muestra todas las tareas de un usuario de una misma categoría
+     * @throws ArrayStoreException - se lanza cuando no se encuentra ningún usuario o ninguna categoría en la base de datos
+     * @throws ArrayIndexOutOfBoundsException - se lanza cuando se introduce un usuario o una categoría que no existe
+     */
     private static void tareasCategoria() {
         if (usuarioDAO.getAll().size() == 0) {
-            System.out.println("Añade un usuario primero");
-            return;
+            throw new ArrayStoreException("Añade un usuario primero");
         }
         if (categoriaDAO.getAll().size() == 0) {
-            System.out.println("Añade una categoria primero");
-            return;
+            throw new ArrayStoreException("Añade una categoria primero");
         }
         List<Long> tareasUsuario = new ArrayList<>();
         System.out.println("Selecciona un usuario");
@@ -248,8 +265,7 @@ public class Main {
         }
         Long usuario = sc.nextLong();
         if (!tareasUsuario.contains(usuario)) {
-            System.out.println("El usuario no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("El usuario no existe");
         }
 
         System.out.println("Selecciona una categoria");
@@ -260,8 +276,7 @@ public class Main {
         }
         Long categoria = sc.nextLong();
         if(!categorias.contains(categoria)) {
-            System.out.println("La categoria no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("La categoria no existe");
         }
 
         for (tareas t : tareasDAO.getTareasCategoria(categoria)) {
@@ -271,10 +286,14 @@ public class Main {
         }
     }
 
+    /**
+     * Muestra todas las tareas de un usuario
+     * @throws ArrayStoreException - se lanza cuando no se encuentra ningún usuario en la base de datos
+     * @throws ArrayIndexOutOfBoundsException - se lanza cuando se introduce un usuario que no existe
+     */
     private static void tareasUsuario() {
         if (usuarioDAO.getAll().size() == 0) {
-            System.out.println("Añade un usuario primero");
-            return;
+            throw new ArrayStoreException("Añade un usuario primero");
         }
 
         List<Long> usuarios = new ArrayList<>();
@@ -284,8 +303,7 @@ public class Main {
         }
         Long usuario = sc.nextLong();
         if (!usuarios.contains(usuario)) {
-            System.out.println("El usuario no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("El usuario no existe");
         }
 
         for (tareas t : tareasDAO.getTareasUsuario(usuario)) {
@@ -293,14 +311,18 @@ public class Main {
         }
     }
 
-    private static void actualizarCategoria() {
+    /**
+     * Cambia la categoría de una tarea
+     * @throws ArrayStoreException - se lanza cuando no se encuentra ningún usuario o ninguna categoría en la base de datos
+     * @throws ArrayIndexOutOfBoundsException - se lanza cuando se introduce un usuario, una categoría o una tarea que no existe
+     * @throws Exception - se lanza al no poder actualizar una categoría
+     */
+    private static void actualizarCategoria() throws Exception {
         if (usuarioDAO.getAll().size() == 0) {
-            System.out.println("Añade un usuario primero");
-            return;
+            throw new ArrayStoreException("Añade un usuario primero");
         }
         if (categoriaDAO.getAll().size() == 0) {
-            System.out.println("Añade una categoria primero");
-            return;
+            throw new ArrayStoreException("Añade una categoria primero");
         }
 
         System.out.println("Selecciona un usuario");
@@ -311,15 +333,19 @@ public class Main {
         }
         Long usuario = sc.nextLong();
         if (!usuarios.contains(usuario)) {
-            System.out.println("El usuario no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("El usuario no existe");
         }
 
         System.out.println("Selecciona una tarea");
+        List<Long> tareas = new ArrayList<>();
         for (tareas t : tareasDAO.getTareasUsuario(usuario)) {
+            tareas.add(t.getId());
             System.out.println(t.toString());
         }
         Long tarea = sc.nextLong();
+        if(!tareas.contains(tarea)) {
+            throw new ArrayIndexOutOfBoundsException("La tarea no existe");
+        }
 
         System.out.println("Selecciona una categoria");
         List<Long> categorias = new ArrayList<>();
@@ -329,8 +355,7 @@ public class Main {
         }
         Long categoria = sc.nextLong();
         if(!categorias.contains(categoria)) {
-            System.out.println("La categoria no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("La categoria no existe");
         }
 
         tareas t = tareasDAO.findById(tarea);
@@ -339,14 +364,19 @@ public class Main {
         if (tareasDAO.update(t) == 1) {
             System.out.println("Estado actualizado");
         } else {
-            System.out.println("Error actualizando estado");
+            throw new Exception("Error actualizando estado");
         }
     }
 
-    private static void actualizarEstado() {
+    /**
+     * Cambia el estado en el que se encuentra una tarea
+     * @throws ArrayStoreException - se lanza cuando no se encuentra ningún usuario en la base de datos
+     * @throws ArrayIndexOutOfBoundsException - se lanza cuando se introduce un usuario, un estado o una tarea que no existe
+     * @throws Exception - se lanza al no poder actualizar un estado
+     */
+    private static void actualizarEstado() throws Exception {
         if (usuarioDAO.getAll().size() == 0) {
-            System.out.println("Añade un usuario primero");
-            return;
+            throw new ArrayStoreException("Añade un usuario primero");
         }
 
         System.out.println("Selecciona un usuario");
@@ -357,23 +387,27 @@ public class Main {
         }
         Long usuario = sc.nextLong();
         if (!usuarios.contains(usuario)) {
-            System.out.println("El usuario no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("El usuario no existe");
         }
 
         System.out.println("Selecciona una tarea");
+        List<Long> tareas = new ArrayList<>();
         for (tareas t : tareasDAO.getTareasUsuario(usuario)) {
+            tareas.add(t.getId());
             System.out.println(t.toString());
         }
         Long tarea = sc.nextLong();
+        if(!tareas.contains(tarea)) {
+            throw new ArrayIndexOutOfBoundsException("La tarea no existe");
+        }
+
         System.out.println("En qué estado se encuentra la tarea?");
         for (estado e : estados) {
             System.out.println(e.toString());
         }
         Long estado = sc.nextLong();
         if(estado != 1L && estado != 2L && estado != 3L &&  estado != 4L)  {
-            System.out.println("Introduce un estado válido");
-            return;
+            throw new ArrayIndexOutOfBoundsException("Introduce un estado válido");
         }
 
         tareas t = tareasDAO.findById(tarea);
@@ -382,20 +416,23 @@ public class Main {
         if (tareasDAO.update(t) == 1) {
             System.out.println("Estado actualizado");
         } else {
-            System.out.println("Error actualizando estado");
+            throw new Exception("Error actualizando estado");
         }
-
-
     }
 
-    private static void crearTarea() {
+    /**
+     * Crea una nueva tarea u la añade a la base de datos
+     * @throws ArrayStoreException - se lanza cuando no se encuentra ningún usuario o ninguna categoría en la base de datos
+     * @throws IllegalArgumentException - se lanza cuando se introduce una fecha anterior a la actual
+     * @throws ArrayIndexOutOfBoundsException - se lanza cuando se introduce un usuario o una categoría que no existe
+     * @throws Exception - se lanza al no poder añadir una tarea a la base de datos
+     */
+    private static void crearTarea() throws Exception {
         if (usuarioDAO.getAll().size() == 0) {
-            System.out.println("Añade un usuario primero");
-            return;
+            throw new ArrayStoreException("Añade un usuario primero");
         }
         if (categoriaDAO.getAll().size() == 0) {
-            System.out.println("Añade una categoria primero");
-            return;
+            throw new ArrayStoreException("Añade una categoria primero");
         }
 
         System.out.println("Escribe el nombre de la tarea");
@@ -408,10 +445,8 @@ public class Main {
         System.out.println("Añade una fecha límite");
         String fecha = sc.next();
 
-        while (LocalDate.parse(fecha, formatter).compareTo(LocalDate.now()) < 0) {
-            System.out.println("Escribe una fecha que no haya pasado aún");
-            System.out.println("Añade una fecha límite");
-            fecha = sc.next();
+        if (LocalDate.parse(fecha, formatter).compareTo(LocalDate.now()) < 0) {
+            throw new IllegalArgumentException("La fecha ya ha pasado");
         }
 
         System.out.println("Para qué usuario es la tarea?");
@@ -422,8 +457,7 @@ public class Main {
         }
         Long usuario = sc.nextLong();
         if (!usuarios.contains(usuario)) {
-            System.out.println("El usuario no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("El usuario no existe");
         }
 
         System.out.println("En qué categoria está?");
@@ -434,8 +468,7 @@ public class Main {
         }
         Long categoria = sc.nextLong();
         if(!categorias.contains(categoria)) {
-            System.out.println("La categoria no existe");
-            return;
+            throw new ArrayIndexOutOfBoundsException("La categoria no existe");
         }
         sc.nextLine();
 
@@ -448,11 +481,15 @@ public class Main {
         if (tareasDAO.add(t) == 1) {
             System.out.println("Tarea añadida");
         } else {
-            System.out.println("Error añadiendo tarea");
+            throw new Exception("Error añadiendo tarea");
         }
     }
 
-    private static void crearCategoria() {
+    /**
+     * Crea una nueva categoría u la añade a la base de datos
+     * @throws Exception - Se lanza al no poder añadir la categoría a la base de datos
+     */
+    private static void crearCategoria() throws Exception {
         System.out.println("Escribe el nombre de la categoria");
         String nombreCategoria = sc.next();
         sc.nextLine();
@@ -468,13 +505,15 @@ public class Main {
         if (categoriaDAO.add(c) == 1) {
             System.out.println("Categoria añadida");
         } else {
-            System.out.println("Error añadiendo la categoria");
+            throw new Exception("Error añadiendo la categoria");
         }
-
-
     }
 
-    private static void crearUsuario() {
+    /**
+     * Crea un nuevo usuario y lo añade a la base de datos
+     * @throws Exception - Se lanza al no poder añadir el usuario a la base de datos
+     */
+    private static void crearUsuario() throws Exception {
         System.out.println("Introduce el nombre del usuario");
         String nombre = sc.next();
 
@@ -492,7 +531,7 @@ public class Main {
         if (usuarioDAO.add(u) == 1) {
             System.out.println("Usuario añadido");
         } else {
-            System.out.println("Error añadiendo usuario");
+            throw new Exception("Error al añadir el usuario");
         }
 
     }
