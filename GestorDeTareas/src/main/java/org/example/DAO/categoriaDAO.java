@@ -14,12 +14,12 @@ public class categoriaDAO implements IOperationsCRUD<Categoria>{
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String query = "SELECT * FROM usuario";
+            String query = "SELECT * FROM categoria";
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 Long id =  rs.getLong("id");
-                String nombre = rs.getString("nombreEstado");
+                String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
 
                 Categoria c = new Categoria(id, nombre, descripcion);
@@ -37,10 +37,9 @@ public class categoriaDAO implements IOperationsCRUD<Categoria>{
         Categoria c = null;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
-            String query = "SELECT * FROM usuario WHERE id = ?";
-            PreparedStatement ps = conexion.prepareStatement(query);
-            ps.setLong(1, id);
-            ResultSet rs = ps.executeQuery();
+            String query = "SELECT * FROM categoria WHERE id = " + id;
+            Statement ps = conexion.createStatement();
+            ResultSet rs = ps.executeQuery(query);
             while(rs.next()){
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
@@ -60,7 +59,7 @@ public class categoriaDAO implements IOperationsCRUD<Categoria>{
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String sql  = "INSERT INTO Tareas (nombre, descripcion) VALUES (?, ?)";
+            String sql  = "INSERT INTO categoria (nombre, descripcion) VALUES (?, ?)";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, object.getNombre());
             ps.setString(2, object.getDescripcion());
@@ -80,7 +79,7 @@ public class categoriaDAO implements IOperationsCRUD<Categoria>{
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String sql =  "UPDATE Tareas SET nombre = ?, descripcion = ? WHERE id = ?";
+            String sql =  "UPDATE categoria SET nombre = ?, descripcion = ? WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, object.getNombre());
             ps.setString(2, object.getDescripcion());
@@ -101,7 +100,7 @@ public class categoriaDAO implements IOperationsCRUD<Categoria>{
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String sql  = "DELETE FROM Categoria WHERE id = ?";
+            String sql  = "DELETE FROM categoria WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setLong(1, id);
             resultado = ps.executeUpdate();

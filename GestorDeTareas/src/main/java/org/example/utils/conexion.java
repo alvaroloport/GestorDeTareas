@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class conexion {
     public static Connection getConnection(){
         Connection conexion = null;
-        String base = "gestorTareas";
+        String base = "gestortareas";
         String url = "jdbc:mysql://127.0.0.1:3306/" + base;
         String usuario = "root";
         String password = "admin";

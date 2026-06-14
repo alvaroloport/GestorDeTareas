@@ -1,15 +1,14 @@
 package org.example.modelo;
 
 import java.util.List;
-import org.example.modelo.Tareas;
 
-public class Estado {
+public class estado {
     private Long id;
     private String nombreEstado;
     private String descripcion;
-    private List<Tareas> tareas;
+    private List<tareas> tareas;
 
-    public Estado(Long id, String nombreEstado) {
+    public estado(Long id, String nombreEstado) {
         this.id = id;
         this.nombreEstado = nombreEstado;
     }
@@ -32,14 +31,14 @@ public class Estado {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public List<Tareas> getTareas() {
+    public List<tareas> getTareas() {
         return tareas;
     }
-    public void setTareas(List<Tareas> tareas) {
+    public void setTareas(List<tareas> tareas) {
         this.tareas = tareas;
     }
     public void mostrarTareas() {
-        for (Tareas tarea : tareas) {
+        for (tareas tarea : tareas) {
             System.out.println(tarea.getTitulo());
         }
     }

@@ -1,13 +1,12 @@
 package org.example.modelo;
 
 import java.util.List;
-import org.example.modelo.Tareas;
 
 public class Categoria {
     private Long id;
     private String nombre;
     private String descripcion;
-    private List<Tareas> tareas;
+    private List<tareas> tareas;
     public Categoria(Long id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
@@ -31,19 +30,19 @@ public class Categoria {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public List<Tareas> getTareas() {
+    public List<tareas> getTareas() {
         return tareas;
     }
-    public void setTareas(List<Tareas> tareas) {
+    public void setTareas(List<tareas> tareas) {
         this.tareas = tareas;
     }
 
     public void mostrarTareas() {
-        for (Tareas tarea : tareas) {
+        for (tareas tarea : tareas) {
             System.out.println(tarea.getTitulo());
         }
     }
     public String toString() {
-        return id + ". " + nombre;
+        return id + ". " + nombre + ". " +  descripcion;
     }
 }

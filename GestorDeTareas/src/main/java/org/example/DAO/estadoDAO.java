@@ -1,29 +1,28 @@
 package org.example.DAO;
 
-import org.example.modelo.Estado;
+import org.example.modelo.estado;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class estadoDAO implements IOperationsCRUD<Estado> {
+public class estadoDAO implements IOperationsCRUD<estado> {
 
     @Override
-    public List<Estado> getAll() {
-        List<Estado> estados = new ArrayList<>();
+    public List<estado> getAll() {
+        List<estado> estados = new ArrayList<>();
 
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String query = "SELECT * FROM usuario";
+            String query = "SELECT * FROM estado";
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 Long id =  rs.getLong("id");
                 String nombre = rs.getString("nombreEstado");
 
-                Estado estado = new Estado(id, nombre);
+                estado estado = new estado(id, nombre);
 
                 estados.add(estado);
             }
@@ -34,18 +33,17 @@ public class estadoDAO implements IOperationsCRUD<Estado> {
     }
 
     @Override
-    public Estado findById(Long id) {
-        Estado estado = null;
+    public estado findById(Long id) {
+        estado estado = null;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
-            String query = "SELECT * FROM usuario WHERE id = ?";
-            PreparedStatement ps = conexion.prepareStatement(query);
-            ps.setLong(1, id);
-            ResultSet rs = ps.executeQuery();
+            String query = "SELECT * FROM estado WHERE id = " + id;
+            Statement ps = conexion.createStatement();
+            ResultSet rs = ps.executeQuery(query);
             while(rs.next()){
                 String nombreEstado = rs.getString("nombreEstado");
 
-                estado = new Estado(id, nombreEstado);
+                estado = new estado(id, nombreEstado);
             }
             ps.close();
         }catch(SQLException e){
@@ -55,12 +53,12 @@ public class estadoDAO implements IOperationsCRUD<Estado> {
     }
 
     @Override
-    public int add(Estado object) {
+    public int add(estado object) {
         int resultado = 0;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String sql  = "INSERT INTO Tareas (nombreEstado) VALUES (?)";
+            String sql  = "INSERT INTO estado (nombreEstado) VALUES (?)";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, object.getNombreEstado());
 
@@ -74,12 +72,12 @@ public class estadoDAO implements IOperationsCRUD<Estado> {
     }
 
     @Override
-    public int update(Estado object) {
+    public int update(estado object) {
         int  resultado = 0;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String sql =  "UPDATE Tareas SET nombreEstado = ? WHERE id = ?";
+            String sql =  "UPDATE estado SET nombreEstado = ? WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, object.getNombreEstado());
             ps.setLong(2, object.getID());
@@ -99,7 +97,7 @@ public class estadoDAO implements IOperationsCRUD<Estado> {
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String sql  = "DELETE FROM Estado WHERE id = ?";
+            String sql  = "DELETE FROM estado WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setLong(1, id);
             resultado = ps.executeUpdate();

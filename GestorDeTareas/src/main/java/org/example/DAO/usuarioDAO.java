@@ -1,15 +1,15 @@
 package org.example.DAO;
 
-import org.example.modelo.Usuario;
+import org.example.modelo.usuario;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class usuarioDAO implements IOperationsCRUD<Usuario> {
+public class usuarioDAO implements IOperationsCRUD<usuario> {
     @Override
-    public List<Usuario> getAll() {
-        List<Usuario> usuarios = new ArrayList<>();
+    public List<usuario> getAll() {
+        List<usuario> usuarios = new ArrayList<>();
 
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
@@ -23,7 +23,7 @@ public class usuarioDAO implements IOperationsCRUD<Usuario> {
                 String email = rs.getString("email");
                 String password = rs.getString("password");
 
-                Usuario u = new Usuario(id, nombre, email, password);
+                usuario u = new usuario(id, nombre, email, password);
 
                 usuarios.add(u);
             }
@@ -34,20 +34,19 @@ public class usuarioDAO implements IOperationsCRUD<Usuario> {
     }
 
     @Override
-    public Usuario findById(Long id) {
-        Usuario u = null;
+    public usuario findById(Long id) {
+        usuario u = null;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
-            String query = "SELECT * FROM usuario WHERE id = ?";
-            PreparedStatement ps = conexion.prepareStatement(query);
-            ps.setLong(1, id);
-            ResultSet rs = ps.executeQuery();
+            String query = "SELECT * FROM usuario WHERE id = " + id;
+            Statement ps = conexion.createStatement();
+            ResultSet rs = ps.executeQuery(query);
             while(rs.next()){
                 String nombre = rs.getString("nombre");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
 
-                u = new Usuario(id, nombre, email, password);
+                u = new usuario(id, nombre, email, password);
             }
             ps.close();
         }catch(SQLException e){
@@ -57,7 +56,7 @@ public class usuarioDAO implements IOperationsCRUD<Usuario> {
     }
 
     @Override
-    public int add(Usuario object) {
+    public int add(usuario object) {
         int resultado = 0;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
@@ -77,16 +76,17 @@ public class usuarioDAO implements IOperationsCRUD<Usuario> {
     }
 
     @Override
-    public int update(Usuario object) {
+    public int update(usuario object) {
         int  resultado = 0;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String sql =  "UPDATE usuario SET nombre = ?, email = ? WHERE id = ?";
+            String sql =  "UPDATE usuario SET nombre = ?, email = ?, password = ? WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, object.getNombre());
             ps.setString(2, object.getEmail());
-            ps.setLong(3, object.getId());
+            ps.setString(3, object.getPassword());
+            ps.setLong(4, object.getId());
             resultado = ps.executeUpdate();
 
             ps.close();

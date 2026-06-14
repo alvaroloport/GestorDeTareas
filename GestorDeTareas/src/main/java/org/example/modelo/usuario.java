@@ -1,16 +1,15 @@
 package org.example.modelo;
 
 import java.util.List;
-import org.example.modelo.Tareas;
 
-public class Usuario {
+public class usuario {
     private Long id;
     private String nombre;
     private String email;
     private String password;
-    private List<Tareas> tareas;
+    private List<tareas> tareas;
 
-    public Usuario(Long id, String nombre, String email, String password) {
+    public usuario(Long id, String nombre, String email, String password) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
@@ -41,21 +40,21 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
-    public List<Tareas> getTareas() {
+    public List<tareas> getTareas() {
         return tareas;
     }
-    public void setTareas(List<Tareas> tareas) {
+    public void setTareas(List<tareas> tareas) {
         this.tareas = tareas;
     }
 
     public void mostrarTareas(){
-        for (Tareas tarea : tareas) {
+        for (tareas tarea : tareas) {
             System.out.println(tarea.toString());
         }
     }
 
     @Override
     public String toString() {
-        return getId() + ". " + getNombre();
+        return getId() + ". " + getNombre() + ". Email: " + getEmail() + ". Password: " + getPassword();
     }
 }

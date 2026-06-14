@@ -1,27 +1,24 @@
 package org.example.modelo;
 
-import org.example.modelo.Usuario;
-import org.example.modelo.Estado;
-import org.example.modelo.Categoria;
+
 
 
 
 import java.time.LocalDate;
-import java.util.Date;
 
-public class Tareas {
+public class tareas {
     private Long id;
     private String titulo;
     private String descripcion;
     private LocalDate fechaCreacion;
     private LocalDate fechaLimite;
-    private Usuario usuario;
-    private Estado estado;
-    private Categoria categoria;
+    private Long usuario;
+    private Long estado;
+    private Long categoria;
     private String observaciones;
 
-    public Tareas(Long id, String titulo, String descripcion, LocalDate fechaCreacion, LocalDate fechaLimite, Usuario usuario,
-                  Estado estado, Categoria categoria, String observaciones) {
+    public tareas(Long id, String titulo, String descripcion, LocalDate fechaCreacion, LocalDate fechaLimite, Long usuario,
+                  Long estado, Long categoria, String observaciones) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -31,9 +28,6 @@ public class Tareas {
         this.estado = estado;
         this.categoria = categoria;
         this.observaciones = observaciones;
-        usuario.getTareas().add(this);
-        estado.getTareas().add(this);
-        categoria.getTareas().add(this);
     }
     public Long getId() {
         return id;
@@ -65,22 +59,22 @@ public class Tareas {
     public void setFechaLimite(LocalDate fechaLimite) {
         this.fechaLimite = fechaLimite;
     }
-    public Usuario getUsuario() {
+    public Long getUsuario() {
         return usuario;
     }
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Long usuario) {
         this.usuario = usuario;
     }
-    public Estado getEstado() {
+    public Long getEstado() {
         return estado;
     }
-    public void setEstado(Estado estado) {
+    public void setEstado(Long estado) {
         this.estado = estado;
     }
-    public Categoria getCategoria() {
+    public Long getCategoria() {
         return categoria;
     }
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(Long categoria) {
         this.categoria = categoria;
     }
     public String getObservaciones() {
@@ -92,23 +86,8 @@ public class Tareas {
 
     @Override
     public String toString() {
-        return id + ". " + titulo + ", estado: " + estado.getNombreEstado() + ", categoria: " + categoria.getNombre();
+        return id + ". " + titulo + ". " + descripcion + ". Fecha límite: " + fechaLimite + ".";
     }
 
-    public void actualizarEstado(Estado estado) {
-        this.estado.getTareas().remove(this);
-        this.estado = estado;
-        this.estado.getTareas().add(this);
-        this.setEstado(estado);
-    }
-    public void asignarCategoria(Categoria categoria) {
-        this.categoria.getTareas().remove(this);
-        this.categoria = categoria;
-        this.categoria.getTareas().add(this);
-        this.setCategoria(categoria);
-    }
-    public void añadirObservacion(String observacion) {
-        this.observaciones += "\n" + observacion;
-    }
 
 }

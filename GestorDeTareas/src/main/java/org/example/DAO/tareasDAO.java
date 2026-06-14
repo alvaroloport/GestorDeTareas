@@ -1,14 +1,13 @@
 package org.example.DAO;
 
-import org.example.modelo.Tareas;
+import org.example.modelo.tareas;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class tareasDAO implements IOperationsCRUD<Tareas> {
+public class tareasDAO implements IOperationsCRUD<tareas> {
 
     private static final usuarioDAO usuarioDAO = new usuarioDAO();
     private static final categoriaDAO categoriaDAO = new categoriaDAO();
@@ -16,13 +15,13 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
 
 
     @Override
-    public List<Tareas> getAll() {
-        List<Tareas> tareas = new ArrayList<>();
+    public List<tareas> getAll() {
+        List<tareas> tareas = new ArrayList<>();
 
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String query = "SELECT * FROM usuario";
+            String query = "SELECT * FROM Tareas";
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
@@ -36,8 +35,8 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
                 Long categoria_id = rs.getLong("idCategoria");
                 String observaciones = rs.getString("observaciones");
 
-                Tareas t = new Tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuarioDAO.findById(usuario_id),
-                        estadoDAO.findById(estado_id), categoriaDAO.findById(categoria_id), observaciones);
+                tareas t = new tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuario_id,
+                        estado_id, categoria_id, observaciones);
 
                 tareas.add(t);
             }
@@ -47,15 +46,14 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
         return tareas;
     }
 
-    public List<Tareas> getTareasUsuario(Long idUsuario) {
-        List<Tareas> tareas = new ArrayList<>();
+    public List<tareas> getTareasUsuario(Long idUsuario) {
+        List<tareas> tareas = new ArrayList<>();
 
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String query = "SELECT * FROM usuario WHERE  idUsuario = ?";
-            PreparedStatement ps = conexion.prepareStatement(query);
-            ps.setLong(1, idUsuario);
+            String query = "SELECT * FROM Tareas WHERE idUsuario =" +  idUsuario;
+            Statement ps = conexion.createStatement();
             ResultSet rs = ps.executeQuery(query);
             while(rs.next()){
                 Long id =  rs.getLong("id");
@@ -68,26 +66,27 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
                 Long categoria_id = rs.getLong("idCategoria");
                 String observaciones = rs.getString("observaciones");
 
-                Tareas t = new Tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuarioDAO.findById(usuario_id),
-                        estadoDAO.findById(estado_id), categoriaDAO.findById(categoria_id), observaciones);
+                tareas t = new tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuario_id,
+                        estado_id, categoria_id, observaciones);
 
                 tareas.add(t);
             }
+            ps.close();
+            rs.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return tareas;
     }
 
-    public List<Tareas> getTareasCategoria(Long idCategoria) {
-        List<Tareas> tareas = new ArrayList<>();
+    public List<tareas> getTareasCategoria(Long idCategoria) {
+        List<tareas> tareas = new ArrayList<>();
 
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String query = "SELECT * FROM usuario WHERE  idCategoria = ?";
-            PreparedStatement ps = conexion.prepareStatement(query);
-            ps.setLong(1, idCategoria);
+            String query = "SELECT * FROM Tareas WHERE idCategoria = " + idCategoria;
+            Statement ps = conexion.createStatement();
             ResultSet rs = ps.executeQuery(query);
             while(rs.next()){
                 Long id =  rs.getLong("id");
@@ -100,8 +99,8 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
                 Long categoria_id = rs.getLong("idCategoria");
                 String observaciones = rs.getString("observaciones");
 
-                Tareas t = new Tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuarioDAO.findById(usuario_id),
-                        estadoDAO.findById(estado_id), categoriaDAO.findById(categoria_id), observaciones);
+                tareas t = new tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuario_id,
+                        estado_id, categoria_id, observaciones);
 
                 tareas.add(t);
             }
@@ -111,15 +110,14 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
         return tareas;
     }
 
-    public List<Tareas> getTareasEstado(Long idEstado) {
-        List<Tareas> tareas = new ArrayList<>();
+    public List<tareas> getTareasEstado(Long idEstado) {
+        List<tareas> tareas = new ArrayList<>();
 
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String query = "SELECT * FROM usuario WHERE  idEstado = ?";
-            PreparedStatement ps = conexion.prepareStatement(query);
-            ps.setLong(1, idEstado);
+            String query = "SELECT * FROM Tareas WHERE idEstado = " +  idEstado;
+            Statement ps = conexion.createStatement();
             ResultSet rs = ps.executeQuery(query);
             while(rs.next()){
                 Long id =  rs.getLong("id");
@@ -132,8 +130,8 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
                 Long categoria_id = rs.getLong("idCategoria");
                 String observaciones = rs.getString("observaciones");
 
-                Tareas t = new Tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuarioDAO.findById(usuario_id),
-                        estadoDAO.findById(estado_id), categoriaDAO.findById(categoria_id), observaciones);
+                tareas t = new tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuario_id,
+                        estado_id, categoria_id, observaciones);
 
                 tareas.add(t);
             }
@@ -144,14 +142,13 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
     }
 
     @Override
-    public Tareas findById(Long id) {
-        Tareas t = null;
+    public tareas findById(Long id) {
+        tareas t = null;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
-            String query = "SELECT * FROM usuario WHERE id = ?";
-            PreparedStatement ps = conexion.prepareStatement(query);
-            ps.setLong(1, id);
-            ResultSet rs = ps.executeQuery();
+            String query = "SELECT * FROM Tareas WHERE id = " + id;
+            Statement ps = conexion.createStatement();
+            ResultSet rs = ps.executeQuery(query);
             while(rs.next()){
                 String titulo = rs.getString("titulo");
                 String descripcion = rs.getString("descripcion");
@@ -162,8 +159,8 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
                 Long categoria_id = rs.getLong("idCategoria");
                 String observaciones = rs.getString("observaciones");
 
-                t = new Tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuarioDAO.findById(usuario_id),
-                        estadoDAO.findById(estado_id), categoriaDAO.findById(categoria_id), observaciones);
+                t = new tareas(id, titulo, descripcion, fechaCreacion, fechaLimite, usuario_id,
+                        estado_id, categoria_id, observaciones);
             }
             ps.close();
         }catch(SQLException e){
@@ -173,21 +170,21 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
     }
 
     @Override
-    public int add(Tareas object) {
+    public int add(tareas object) {
         int resultado = 0;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String sql  = "INSERT INTO Tareas (titulo, descripcion, fechaCreacion, fechaLimite, usuario, estado, categoria,"
-                           + "observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql  = "INSERT INTO Tareas (titulo, descripcion, fechaCreacion, fechaLimite, idUsuario, idEstado, idCategoria,"
+                    + "observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, object.getTitulo());
             ps.setString(2, object.getDescripcion());
             ps.setDate(3, new java.sql.Date(System.currentTimeMillis()));
             ps.setDate(4, Date.valueOf(object.getFechaLimite()));
-            ps.setLong(5, object.getUsuario().getId());
-            ps.setLong(6, object.getEstado().getID());
-            ps.setLong(7, object.getCategoria().getId());
+            ps.setLong(5, object.getUsuario());
+            ps.setLong(6, object.getEstado());
+            ps.setLong(7, object.getCategoria());
             ps.setString(8, object.getObservaciones());
 
             resultado = ps.executeUpdate();
@@ -200,25 +197,17 @@ public class tareasDAO implements IOperationsCRUD<Tareas> {
     }
 
     @Override
-    public int update(Tareas object) {
+    public int update(tareas object) {
         int  resultado = 0;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
 
-            String sql =  "UPDATE Tareas SET titulo = ?, descripcion = ?, fechaCreacion = ?. fechaLimite = ?,"
-                            + "usuario = ?, estado = ?, categoria = ?, observaciones = ? WHERE id = ?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, object.getTitulo());
-            ps.setString(2, object.getDescripcion());
-            ps.setDate(3, new java.sql.Date(System.currentTimeMillis()));
-            ps.setDate(4, Date.valueOf(object.getFechaLimite()));
-            ps.setLong(5, object.getUsuario().getId());
-            ps.setLong(6, object.getEstado().getID());
-            ps.setLong(7, object.getCategoria().getId());
-            ps.setString(8, object.getObservaciones());
-            ps.setLong(9, object.getId());
-
-            resultado = ps.executeUpdate();
+            String sql =  "UPDATE Tareas SET titulo ='"+ object.getTitulo() + "', descripcion = '"+ object.getDescripcion()
+                    + "', fechaCreacion = '"+ new java.sql.Date(System.currentTimeMillis()) + "', fechaLimite = '"+ object.getFechaLimite()
+                    + "', idUsuario = '"+ object.getUsuario() + "', idEstado = '"+ object.getEstado() + "', idCategoria = '"+ object.getCategoria()
+                    + "', observaciones = '"+ object.getObservaciones() + "' WHERE id = '"+ object.getId() +"'";
+            Statement ps = conexion.createStatement();
+            resultado = ps.executeUpdate(sql);
 
             ps.close();
         }catch(SQLException e){
