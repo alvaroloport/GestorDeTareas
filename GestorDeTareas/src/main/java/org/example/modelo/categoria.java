@@ -2,12 +2,12 @@ package org.example.modelo;
 
 import java.util.List;
 
-public class Categoria {
+public class categoria {
     private Long id;
     private String nombre;
     private String descripcion;
     private List<tareas> tareas;
-    public Categoria(Long id, String nombre, String descripcion) {
+    public categoria(Long id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;

@@ -1,15 +1,15 @@
 package org.example.DAO;
 
-import org.example.modelo.Categoria;
+import org.example.modelo.categoria;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class categoriaDAO implements IOperationsCRUD<Categoria>{
+public class categoriaDAO implements IOperationsCRUD<categoria>{
     @Override
-    public List<Categoria> getAll() {
-        List<Categoria> categorias = new ArrayList<>();
+    public List<categoria> getAll() {
+        List<categoria> categorias = new ArrayList<>();
 
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
@@ -22,7 +22,7 @@ public class categoriaDAO implements IOperationsCRUD<Categoria>{
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
 
-                Categoria c = new Categoria(id, nombre, descripcion);
+                categoria c = new categoria(id, nombre, descripcion);
 
                 categorias.add(c);
             }
@@ -33,8 +33,8 @@ public class categoriaDAO implements IOperationsCRUD<Categoria>{
     }
 
     @Override
-    public Categoria findById(Long id) {
-        Categoria c = null;
+    public categoria findById(Long id) {
+        categoria c = null;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
             String query = "SELECT * FROM categoria WHERE id = " + id;
@@ -44,7 +44,7 @@ public class categoriaDAO implements IOperationsCRUD<Categoria>{
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
 
-                c = new Categoria(id, nombre, descripcion);
+                c = new categoria(id, nombre, descripcion);
             }
             ps.close();
         }catch(SQLException e){
@@ -54,7 +54,7 @@ public class categoriaDAO implements IOperationsCRUD<Categoria>{
     }
 
     @Override
-    public int add(Categoria object) {
+    public int add(categoria object) {
         int resultado = 0;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();
@@ -74,7 +74,7 @@ public class categoriaDAO implements IOperationsCRUD<Categoria>{
     }
 
     @Override
-    public int update(Categoria object) {
+    public int update(categoria object) {
         int  resultado = 0;
         try{
             Connection conexion = org.example.utils.conexion.getConnection();

@@ -6,7 +6,7 @@ import org.example.DAO.tareasDAO;
 import org.example.DAO.usuarioDAO;
 import org.example.modelo.usuario;
 import org.example.modelo.tareas;
-import org.example.modelo.Categoria;
+import org.example.modelo.categoria;
 import org.example.modelo.estado;
 
 import java.time.LocalDate;
@@ -20,16 +20,12 @@ public class Main {
 
     private static final Scanner sc = new Scanner(System.in);
     private static List<usuario> usuarios = new ArrayList<>();
-    private static List<Categoria> categorias = new ArrayList<>();
+    private static List<categoria> categorias = new ArrayList<>();
     private static List<tareas> tareas = new ArrayList<>();
     private static List<estado> estados = new ArrayList<>();
 
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    private static estado pendiente = new estado(1L, "Pendiente");
-    private static estado enProgreso = new estado(2L, "En Progreso");
-    private static estado completada = new estado(3L, "completada");
-    private static estado cancelada = new estado(4L, "cancelada");
 
     private static usuarioDAO usuarioDAO = new usuarioDAO();
     private static tareasDAO tareasDAO = new tareasDAO();
@@ -38,22 +34,6 @@ public class Main {
 
 
     static void main() throws Exception {
-        estados.add(pendiente);
-        estadoDAO.add(pendiente);
-        List<tareas> tareasPendientes = new ArrayList<>();
-        pendiente.setTareas(tareasPendientes);
-        estados.add(enProgreso);
-        estadoDAO.add(enProgreso);
-        List<tareas> tareasEnProgreso = new ArrayList<>();
-        enProgreso.setTareas(tareasEnProgreso);
-        estados.add(completada);
-        estadoDAO.add(completada);
-        List<tareas> tareasCompletadas = new ArrayList<>();
-        completada.setTareas(tareasCompletadas);
-        estados.add(cancelada);
-        estadoDAO.add(cancelada);
-        List<tareas> tareasCanceladas = new ArrayList<>();
-        cancelada.setTareas(tareasCanceladas);
         int opcion;
         do {
             System.out.println("=================================");
@@ -94,7 +74,6 @@ public class Main {
                 case 0 -> System.out.println("Saliendo");
                 default -> System.out.println("Opcion no válida");
             }
-
         } while (opcion != 0);
     }
 
@@ -122,7 +101,7 @@ public class Main {
     }
 
     private static void mostrarCategorias() {
-        for (Categoria c : categoriaDAO.getAll()) {
+        for (categoria c : categoriaDAO.getAll()) {
             System.out.println(c.toString());
         }
     }
@@ -184,7 +163,7 @@ public class Main {
 
         System.out.println("Selecciona una categoria");
         List<Long> categorias = new ArrayList<>();
-        for (Categoria c : categoriaDAO.getAll()) {
+        for (categoria c : categoriaDAO.getAll()) {
             categorias.add(c.getId());
             System.out.println(c.toString());
         }
@@ -198,7 +177,7 @@ public class Main {
         System.out.println("Introduce la nueva descripcion");
         String descripcion = sc.next();
 
-        Categoria c = new Categoria(categoria, nombre, descripcion);
+        categoria c = new categoria(categoria, nombre, descripcion);
 
         if(categoriaDAO.update(c) == 1) {
             System.out.println("Categoria modificada");
@@ -270,7 +249,7 @@ public class Main {
 
         System.out.println("Selecciona una categoria");
         List<Long> categorias = new ArrayList<>();
-        for (Categoria c : categoriaDAO.getAll()) {
+        for (categoria c : categoriaDAO.getAll()) {
             categorias.add(c.getId());
             System.out.println(c.toString());
         }
@@ -349,7 +328,7 @@ public class Main {
 
         System.out.println("Selecciona una categoria");
         List<Long> categorias = new ArrayList<>();
-        for (Categoria c : categoriaDAO.getAll()) {
+        for (categoria c : categoriaDAO.getAll()) {
             categorias.add(c.getId());
             System.out.println(c.toString());
         }
@@ -462,7 +441,7 @@ public class Main {
 
         System.out.println("En qué categoria está?");
         List<Long> categorias = new ArrayList<>();
-        for (Categoria c : categoriaDAO.getAll()) {
+        for (categoria c : categoriaDAO.getAll()) {
             categorias.add(c.getId());
             System.out.println(c.toString());
         }
@@ -497,7 +476,7 @@ public class Main {
         System.out.println("Añade una pequeña descripción");
         String descripcionCategoria = sc.nextLine();
 
-        Categoria c = new Categoria(null, nombreCategoria, descripcionCategoria);
+        categoria c = new categoria(null, nombreCategoria, descripcionCategoria);
         List<tareas> listaTareas = new ArrayList<>();
         c.setTareas(listaTareas);
 

@@ -1,9 +1,5 @@
 package org.example.modelo;
 
-
-
-
-
 import java.time.LocalDate;
 
 public class tareas {
